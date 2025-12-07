@@ -10,12 +10,11 @@ public class NewMonoBehaviourScript : MonoBehaviour
     public float playerSpeed = 5f;
 
     [Header("Configuración de Sprites")]
-    public Sprite[] mySprites;      // Tus sprites de caminar
-    public Sprite shootSprite;      // <--- EL NUEVO SPRITE DE DISPARO
+    public Sprite[] mySprites;
+    public Sprite shootSprite;
     private int index = 0;
     
-    // Variables de estado
-    private bool isShooting = false; // Bandera para saber si estamos disparando
+    private bool isShooting = false;
 
     private Rigidbody2D myRigidbody2D;
     private SpriteRenderer mySpriteRenderer;
@@ -26,40 +25,32 @@ public class NewMonoBehaviourScript : MonoBehaviour
         myRigidbody2D = GetComponent<Rigidbody2D>();
         mySpriteRenderer = GetComponent<SpriteRenderer>();
         StartCoroutine(WalkCoRutine());
-        // myGameManager = FindObjectOfType<GameManager>(); 
         myRigidbody2D.constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 
     void Update()
     {
-        // 1. Movimiento Horizontal
         float inputX = Input.GetAxisRaw("Horizontal");
         myRigidbody2D.linearVelocity = new Vector2(inputX * playerSpeed, myRigidbody2D.linearVelocity.y);
 
-        // 2. Salto
         if (Input.GetKeyDown(KeyCode.Space))
         {
             myRigidbody2D.linearVelocity = new Vector2(myRigidbody2D.linearVelocity.x, playerJumpForce);
         }
-
-        // 3. DETECTAR LA TECLA F PARA LA ANIMACIÓN
-        // Importante: Usamos KeyCode.F
         if (Input.GetKeyDown(KeyCode.F) && !isShooting) 
         {
             StartCoroutine(ShootCoRutine());
         }
     }
 
-    // Corrutina para manejar la animación de disparo
     IEnumerator ShootCoRutine()
     {
-        isShooting = true; // Pausamos la animación de caminar
+        isShooting = true;
         
-        // Cambiamos al sprite de disparo
         mySpriteRenderer.sprite = shootSprite;
         yield return new WaitForSeconds(0.2f);
 
-        isShooting = false; // Reanudamos la animación de caminar
+        isShooting = false;
     }
 
     IEnumerator WalkCoRutine()
