@@ -13,7 +13,6 @@ public class NewMonoBehaviourScript : MonoBehaviour
     public Sprite[] mySprites;
     public Sprite shootSprite;
     private int index = 0;
-    
     private bool isShooting = false;
 
     private Rigidbody2D myRigidbody2D;
@@ -71,14 +70,13 @@ public class NewMonoBehaviourScript : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("GoodItem"))
         {
             Destroy(collision.gameObject);
-            myGameManager.AddScore();
         }
-        else if (collision.CompareTag("BadItem"))
+        if (collision.CompareTag("BadItem"))
         {
             Destroy(collision.gameObject);
             PlayerDeath();
@@ -94,7 +92,3 @@ public class NewMonoBehaviourScript : MonoBehaviour
         SceneManager.LoadScene("Level1");
     }
 }
-
-
-
- 

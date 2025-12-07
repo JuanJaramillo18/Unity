@@ -179,7 +179,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87fb59aae6e7142caa7803ae1beab9ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemigo
-  vida: 60
+  vida: 90
 --- !u!114 &-2081060569294798836
 MonoBehaviour:
   m_ObjectHideFlags: 0
