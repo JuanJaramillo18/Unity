@@ -5,7 +5,6 @@ using System.Collections.Generic;
 public class SpawnManager : MonoBehaviour
 {
     public GameObject[] itemPrefabs;
-
     public float minTime = 1f;
     public float maxTime = 2f;
 
@@ -17,7 +16,7 @@ public class SpawnManager : MonoBehaviour
     IEnumerator SpawnCoRutine(float waitTime)
     {
         yield return new WaitForSeconds(waitTime);
-        Instantiate(itemPrefabs[Random.Range(0, itemPrefabs.Length)], transform.position, Quaternion.identity);
+        Instantiate(itemPrefabs[Random.Range(0, itemPrefabs.Length-1)], transform.position, Quaternion.identity);
         StartCoroutine(SpawnCoRutine(Random.Range(minTime, maxTime)));
     }
     void Update()
